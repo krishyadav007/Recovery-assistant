@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help bot</title>
+    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+    <h1 class="text-4xl font-bold mb-6 text-blue-600">Health advisor</h1>
+    <div id="file-upload" class="w-full max-w-2xl bg-white rounded-lg shadow-lg p-6 mb-6">
+        <form id="upload-form" method="post" enctype="multipart/form-data" class="flex flex-col items-center">
+            <input type="file" name="file" id="file-input" class="mb-4 p-2 border border-gray-300 rounded-lg">
+            <button type="submit" class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition duration-300">Upload PDF</button>
+        </form>
+    </div>
+    <div id="chat-interface" class="w-full max-w-2xl bg-white rounded-lg shadow-lg p-6">
+        <div id="messages" class="h-64 overflow-y-auto mb-4 p-4 border border-gray-300 rounded-lg bg-gray-50"></div>
+        <div class="flex">
+            <input type="text" id="message-input" class="flex-grow p-2 border border-gray-300 rounded-l-lg" placeholder="Type a message...">
+            <button onclick="sendMessage()" class="px-4 py-2 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 transition duration-300">Send</button>
+        </div>
+    </div>
+    <script>
+        const uid = "{{ uid }}"; // Pass the uid from the template
+    </script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+            uploadFile();
+        });
+    </script>
+</body>
+</html>
